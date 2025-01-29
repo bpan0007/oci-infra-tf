@@ -24,11 +24,14 @@ data "oci_core_images" "test_images" {
 data "oci_core_subnets" "test_subnets" {
   #Required
   compartment_id = var.compartment_id
-  depends_on = [
-    var.public_subnet_id
-  ]
   #Optional
   # vcn_id = module.vcn.vcn_id
+
+  filter {
+    name   = "display_name"
+    values = ["private"]
+    regex = true
+  }
 }
 
 data "oci_identity_availability_domain" "ad" {

@@ -102,3 +102,7 @@ output "subnet_ids_list" {
 output "public_subnet_id" {
   value = join(",", [for subnet in oci_core_subnet.subnets : subnet.id if !subnet.prohibit_public_ip_on_vnic])
 }
+
+output "private_subnet_id" {
+  value = join(",", [for subnet in oci_core_subnet.subnets : subnet.id if subnet.prohibit_public_ip_on_vnic])
+}

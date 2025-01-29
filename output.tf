@@ -14,7 +14,11 @@ output "backend_set_name" {
   value = module.load_balancer.applayer_lb_backend_set_name
 }
 
-output "single_subnet_id" {
+output "public_subnet_id" {
   value       = module.vcn.public_subnet_id
   description = "public subnet" # Replace 0 with the index of the desired subnet
+}
+output "private_subnet_id" {
+  value       = module.vcn.private_subnet_id
+  description = "private subnet" # Replace 0 with the index of the desired subnet
 }
