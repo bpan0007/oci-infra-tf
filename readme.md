@@ -57,19 +57,20 @@ Create a `terraform.tfvars.json` file with your network configuration:
 └── tests/             # Terratest test files
 ```
 
-## Usage
+# Usage
 
 1. Setup OCI credentials
 
 #!/bin/zsh
-# Set these in your ~/.zshrc or ~/.bash_profile
+## Set in your ~/.zshrc or ~/.bash_profile
+```bash
 export TF_VAR_tenancy_ocid=""
 export TF_VAR_user_ocid=""
 export TF_VAR_fingerprint=""
 export TF_VAR_private_key_path=""
 export TF_VAR_compartment_id=""
 export TF_VAR_ssh_public_key=""
-
+```
 
 1. Initialize Terraform:
 ```bash

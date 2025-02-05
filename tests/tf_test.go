@@ -53,16 +53,16 @@ func TestTerraformBasicExampleUnique(t *testing.T) {
 	// Test Public Subnet ID output
 	publicSubnetID := terraform.Output(t, terraformOptions, "public_subnet_id")
 	assert.NotEmpty(t, publicSubnetID, "Public subnet ID should not be empty")
+	// Test subnets properties output
+	subnetsMap := terraform.OutputMap(t, terraformOptions, "subnets_properties")
 
-	// actualTextExample := terraform.Output(t, terraformOptions, "example")
-	// actualTextExample2 := terraform.Output(t, terraformOptions, "example2")
-	// actualExampleList := terraform.OutputList(t, terraformOptions, "example_list")
-	// actualExampleMap := terraform.OutputMap(t, terraformOptions, "example_map")
+	// Test public subnet properties
+	assert.Contains(t, subnetsMap, "public-subnet")
+	publicSubnet := terraform.OutputMapOfObjects(t, terraformOptions, "subnets_properties")["public-subnet"]
+	publicSubnetMap := publicSubnet.(map[string]interface{})
+	assert.Equal(t, "10.0.0.0/24", publicSubnetMap["cidr_block"])
+	assert.Equal(t, false, publicSubnetMap["prohibit_internet_ingress"])
+	assert.Equal(t, false, publicSubnetMap["prohibit_public_ip_on_vnic"])
+	assert.Equal(t, "AVAILABLE", publicSubnetMap["state"])
 
-	// // website::tag::3::Check the output against expected values.
-	// // Verify we're getting back the outputs we expect
-	// assert.Equal(t, expectedText, actualTextExample)
-	// assert.Equal(t, expectedText, actualTextExample2)
-	// assert.Equal(t, expectedList, actualExampleList)
-	// assert.Equal(t, expectedMap, actualExampleMap)
 }
